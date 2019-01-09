@@ -202,6 +202,15 @@ class AMapController {
     );
   }
 
+  Future setCenter(LatLng target) {
+    L.p('setCenter dart端参数: target -> $target');
+
+    return _mapChannel.invokeMethod(
+      'map#setCenter',
+      {'target': target.toJsonString()},
+    );
+  }
+
   /// 获取中心点
   Future<LatLng> getCenterLatlng() async {
     String result = await _mapChannel.invokeMethod("map#getCenterPoint");

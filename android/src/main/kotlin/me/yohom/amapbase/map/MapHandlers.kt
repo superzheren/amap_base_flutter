@@ -375,6 +375,23 @@ object ClearMarker : MapMethodHandler {
     }
 }
 
+object SetCenter : MapMethodHandler {
+
+    lateinit var map: AMap
+
+    override fun with(map: AMap): SetCenter {
+        this.map = map
+        return this
+    }
+
+    override fun onMethodCall(methodCall: MethodCall, methodResult: MethodChannel.Result) {
+        val targetJson = methodCall.argument<String>("target") ?: "{}"
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(targetJson.parseFieldJson<LatLng>(), map.cameraPosition.zoom))
+
+        methodResult.success(success)
+    }
+}
+
 object ChangeLatLng : MapMethodHandler {
 
     lateinit var map: AMap

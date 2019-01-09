@@ -29,6 +29,9 @@ class _DrawClickScreenState extends State<DrawClickScreen> {
               _controller.onTapEvent.listen((latlng) async {
                 await _controller.addMarker(MarkerOptions(position: latlng));
               });
+              _controller.markerClickedEvent.listen((marker) {
+                _controller.setCenter(marker.position);
+              });
             },
             amapOptions: AMapOptions(),
           );

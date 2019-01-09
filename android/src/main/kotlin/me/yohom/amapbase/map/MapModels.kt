@@ -125,7 +125,7 @@ class UnifiedMarkerOptions(
     fun applyTo(map: AMap) {
         map.addMarker(toMarkerOption())
 
-        map.animateCamera(CameraUpdateFactory.newLatLngBounds(LatLngBounds.builder().include(position).build(), 100))
+        //map.animateCamera(CameraUpdateFactory.newLatLngBounds(LatLngBounds.builder().include(position).build(), 100))
     }
 
     fun toMarkerOption(): MarkerOptions = MarkerOptions()

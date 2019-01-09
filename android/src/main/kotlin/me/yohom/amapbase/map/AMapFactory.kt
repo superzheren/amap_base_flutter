@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import com.amap.api.maps.AMapOptions
 import com.amap.api.maps.TextureMapView
+import com.amap.api.maps.model.LatLng
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.StandardMessageCodec
@@ -21,6 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 const val mapChannelName = "me.yohom/map"
 const val markerClickedChannelName = "me.yohom/marker_clicked"
+const val onTapChannelName = "me.yohom/ontap"
 const val success = "调用成功"
 
 class AMapFactory(private val activityState: AtomicInteger)
@@ -84,6 +86,18 @@ class AMapView(context: Context,
                     ?.with(mapView.map)
                     ?.onMethodCall(call, result) ?: result.notImplemented()
         }
+
+        EventChannel(registrar.messenger(), "$onTapChannelName$id").setStreamHandler(object: EventChannel.StreamHandler{
+            override fun onListen(p0: Any?, p1: EventChannel.EventSink) {
+                mapView.map.setOnMapClickListener { latLng: LatLng ->
+                    p1.success(latLng.toFieldJson())
+                }
+            }
+
+            override fun onCancel(p0: Any?) {
+                mapView.map.setOnMapClickListener(null)
+            }
+        })
 
         // marker click event channel
         var eventSink: EventChannel.EventSink? = null

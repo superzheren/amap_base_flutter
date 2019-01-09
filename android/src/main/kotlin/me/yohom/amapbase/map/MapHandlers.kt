@@ -520,3 +520,17 @@ object ScreenShot : MapMethodHandler {
         })
     }
 }
+
+object OnTap : MapMethodHandler {
+    lateinit var map: AMap
+    override fun with(map: AMap): OnTap {
+        this.map = map
+        return this
+    }
+
+    override fun onMethodCall(methodCall: MethodCall, methodResult: MethodChannel.Result) {
+        this.map.setOnMapClickListener { latLng: LatLng ->
+            methodResult.success(latLng.toFieldJson())
+        }
+    }
+}

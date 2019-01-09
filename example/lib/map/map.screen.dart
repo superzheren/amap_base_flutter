@@ -15,6 +15,7 @@ import 'package:amap_base_example/widgets/dimens.dart';
 import 'package:amap_base_example/widgets/function_group.widget.dart';
 import 'package:amap_base_example/widgets/function_item.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:amap_base_example/map/draw_on_map/draw_click.screen.dart';
 
 class MapDemo extends StatelessWidget {
   @override
@@ -96,6 +97,11 @@ class MapDemo extends StatelessWidget {
         FunctionGroup(
           headLabel: '在地图上绘制',
           children: <Widget>[
+            FunctionItem(
+              label: '绘制点击标记',
+              sublabel: 'DrawClickScreen',
+              target: DrawClickScreen(),
+            ),
             FunctionItem(
               label: '绘制点标记',
               sublabel: 'DrawPointScreen',

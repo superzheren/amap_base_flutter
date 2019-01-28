@@ -47,7 +47,7 @@ dependencies {
 
     implementation 'com.amap.api:navi-3dmap:6.5.0_3dmap6.5.0'
     implementation 'com.amap.api:search:6.5.0.1'
-    implementation 'com.amap.api:location:4.4.0'
+    implementation 'com.amap.api:location:4.5.0'
 
     // 需要getter和setter序列化时, 使用fastjson
     implementation 'com.alibaba:fastjson:1.2.54'

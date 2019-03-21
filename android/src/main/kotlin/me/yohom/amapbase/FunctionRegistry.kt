@@ -34,7 +34,8 @@ val MAP_METHOD_HANDLER: Map<String, MapMethodHandler> = mapOf(
         "map#setCustomMapStyleID" to SetCustomMapStyleID,
         "map#getCenterPoint" to GetCenterLnglat,
         "map#changeLatLng" to ChangeLatLng,
-        "map#setCenter" to SetCenter
+        "map#setCenter" to SetCenter,
+        "map#wgs84ToGaode" to Wgs84ToGaode
 )
 
 /**

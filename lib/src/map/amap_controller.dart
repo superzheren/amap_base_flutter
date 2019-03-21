@@ -211,6 +211,11 @@ class AMapController {
     );
   }
 
+  Future<LatLng> wgs84ToGaode(LatLng sourceLatLng) async {
+    String result = await _mapChannel.invokeMethod("map#wgs84ToGaode");
+    return LatLng.fromJson(json.decode(result));
+  }
+
   /// 获取中心点
   Future<LatLng> getCenterLatlng() async {
     String result = await _mapChannel.invokeMethod("map#getCenterPoint");

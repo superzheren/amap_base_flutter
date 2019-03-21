@@ -551,3 +551,21 @@ object OnTap : MapMethodHandler {
         }
     }
 }
+
+object Wgs84ToGaode : MapMethodHandler {
+    lateinit var map: AMap
+    override fun with(map: AMap): MapMethodHandler {
+        this.map = map
+        return this
+    }
+
+    override fun onMethodCall(methodCall: MethodCall, methodResult: MethodChannel.Result) {
+        val sourceLatLng: LatLng? = methodCall.argument<String>("sourceLatLng")?.parseFieldJson()
+
+        val converter = CoordinateConverter(registrar.context())
+        converter.from(CoordinateConverter.CoordType.GPS)
+        converter.coord(sourceLatLng)
+        val desLatLng = converter.convert()
+        methodResult.success(desLatLng.toFieldJson())
+    }
+}
